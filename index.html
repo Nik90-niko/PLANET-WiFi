@@ -3,16 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PLANET WiFi - One Planet. One Connection.</title>
+<title>Planet WiFi | Global Internet Platform</title>
 
 <style>
 *{box-sizing:border-box}
+
 body{
  margin:0;
  font-family:Arial,sans-serif;
- background:#f4f6fa;
+ background:#f3f6fb;
  color:#17243b;
 }
+
 header{
  background:#102747;
  color:white;
@@ -20,52 +22,136 @@ header{
  display:flex;
  justify-content:space-between;
  align-items:center;
+ flex-wrap:wrap;
+ gap:12px;
 }
-.logo{font-size:23px;font-weight:bold}
+
+.logo{
+ font-size:24px;
+ font-weight:bold;
+}
+
 .logo span{color:#ff8a00}
+
+nav{
+ display:flex;
+ flex-wrap:wrap;
+ gap:15px;
+}
+
 nav a{
  color:white;
  text-decoration:none;
- margin-left:12px;
- font-size:13px;
+ font-size:14px;
 }
+
 .hero{
- background:linear-gradient(135deg,#102747,#174d79);
+ background:linear-gradient(135deg,#102747,#17618c);
  color:white;
  text-align:center;
- padding:65px 18px;
+ padding:55px 18px;
 }
-.hero h1{font-size:34px;margin:0 0 15px}
-.hero p{line-height:1.7}
+
+.hero h1{
+ font-size:36px;
+ margin:0 0 15px;
+}
+
+.hero p{
+ line-height:1.7;
+}
+
 .btn{
- background:#ff8500;
+ background:#ff8900;
  color:white;
  border:0;
- padding:14px 25px;
+ padding:13px 22px;
  border-radius:7px;
  font-weight:bold;
  cursor:pointer;
- display:inline-block;
  text-decoration:none;
- margin-top:15px;
+ display:inline-block;
 }
-.container{padding:25px 15px;max-width:1000px;margin:auto}
-h2{text-align:center}
-.countries,.packages{
+
+.container{
+ max-width:1100px;
+ margin:auto;
+ padding:30px 16px;
+}
+
+.section-title{
+ text-align:center;
+ margin-bottom:10px;
+}
+
+.subtitle{
+ text-align:center;
+ color:#68758a;
+ margin-bottom:25px;
+}
+
+.dashboard{
  display:grid;
- grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
- gap:14px;
- margin-top:20px;
+ grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+ gap:15px;
 }
+
+.stat{
+ background:white;
+ padding:22px;
+ border-radius:12px;
+ box-shadow:0 2px 10px #0000000b;
+}
+
+.stat h3{
+ color:#69768a;
+ font-size:14px;
+}
+
+.stat strong{
+ font-size:25px;
+ color:#102747;
+}
+
+.countries,.packages,.services{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(145px,1fr));
+ gap:15px;
+}
+
 .card{
  background:white;
- padding:20px 12px;
+ padding:20px 14px;
  border-radius:12px;
  text-align:center;
- box-shadow:0 2px 10px #0000000c;
+ box-shadow:0 2px 10px #0000000b;
 }
-.card h3{margin:8px 0}
-.price{font-size:23px;color:#f07800;font-weight:bold}
+
+.card h3{
+ margin:10px 0;
+}
+
+.country{
+ cursor:pointer;
+ border:2px solid transparent;
+}
+
+.country:hover,.country.selected{
+ border-color:#ff8900;
+ background:#fff8ef;
+}
+
+.flag{
+ font-size:32px;
+}
+
+.price{
+ font-size:24px;
+ color:#f07800;
+ font-weight:bold;
+ margin:12px 0;
+}
+
 .card button{
  background:#102747;
  color:white;
@@ -73,23 +159,58 @@ h2{text-align:center}
  border-radius:6px;
  padding:11px;
  width:100%;
- margin-top:12px;
+ cursor:pointer;
 }
+
 .info{
  background:white;
- margin-top:25px;
  padding:25px;
  border-radius:12px;
  text-align:center;
 }
+
+.notice{
+ background:#fff5e8;
+ border-left:4px solid #ff8900;
+ padding:14px;
+ border-radius:6px;
+ margin-top:20px;
+ font-size:14px;
+}
+
 footer{
  background:#102747;
  color:white;
  text-align:center;
- padding:25px;
- margin-top:35px;
+ padding:30px;
+ margin-top:30px;
 }
-footer a{color:white;margin:8px}
+
+footer a{
+ color:white;
+ margin:8px;
+}
+
+#message{
+ position:fixed;
+ bottom:20px;
+ left:50%;
+ transform:translateX(-50%);
+ background:#102747;
+ color:white;
+ padding:14px 20px;
+ border-radius:8px;
+ display:none;
+ z-index:10;
+ max-width:90%;
+ text-align:center;
+}
+
+@media(max-width:600px){
+ .hero h1{font-size:28px}
+ header{justify-content:center}
+ nav{justify-content:center}
+}
 </style>
 </head>
 
@@ -97,98 +218,385 @@ footer a{color:white;margin:8px}
 
 <header>
  <div class="logo">PLANET <span>WiFi</span></div>
+
  <nav>
   <a href="#home">Home</a>
-  <a href="#packages">Packages</a>
+  <a href="#dashboard">Dashboard</a>
   <a href="#countries">Countries</a>
+  <a href="#packages">Packages</a>
+  <a href="#providers">Providers</a>
  </nav>
 </header>
 
 <section class="hero" id="home">
  <h1>One Planet. One Connection.</h1>
- <p>Connect to WiFi networks and internet partners across the world.</p>
- <p>Choose your country, select a package and get connected.</p>
- <a href="#packages" class="btn">Explore WiFi Packages</a>
+
+ <p>
+ Discover internet services and WiFi providers
+ across countries around the world.
+ </p>
+
+ <p>
+ Choose a country, explore providers and select your package.
+ </p>
+
+ <a href="#countries" class="btn">Explore Countries</a>
 </section>
 
-<div class="container" id="countries">
- <h2>Choose Your Country</h2>
- <div class="countries">
-  <div class="card">🇰🇪<h3>Kenya</h3></div>
-  <div class="card">🇺🇬<h3>Uganda</h3></div>
-  <div class="card">🇹🇿<h3>Tanzania</h3></div>
-  <div class="card">🇿🇦<h3>South Africa</h3></div>
-  <div class="card">🇬🇧<h3>United Kingdom</h3></div>
-  <div class="card">🇺🇸<h3>United States</h3></div>
-  <div class="card">🇮🇳<h3>India</h3></div>
-  <div class="card">🇩🇪<h3>Germany</h3></div>
+<!-- DASHBOARD -->
+
+<section class="container" id="dashboard">
+
+ <h2 class="section-title">Global Dashboard</h2>
+
+ <p class="subtitle">
+ Welcome to your Planet WiFi platform.
+ </p>
+
+ <div class="dashboard">
+
+  <div class="stat">
+   <h3>Global Network</h3>
+   <strong>Worldwide</strong>
+  </div>
+
+  <div class="stat">
+   <h3>Regions</h3>
+   <strong>6</strong>
+  </div>
+
+  <div class="stat">
+   <h3>Platform</h3>
+   <strong>Active</strong>
+  </div>
+
+  <div class="stat">
+   <h3>Selected Country</h3>
+   <strong id="selectedCountry">Kenya</strong>
+  </div>
+
  </div>
-</div>
+</section>
 
-<div class="container" id="packages">
- <h2>Kenya WiFi Packages</h2>
- <p style="text-align:center">Unlimited access for the selected time, subject to network availability.</p>
+<!-- COUNTRIES -->
 
- <div class="packages">
+<section class="container" id="countries">
+
+ <h2 class="section-title">Explore Countries</h2>
+
+ <p class="subtitle">
+ Select your country to explore available internet services.
+ </p>
+
+ <div class="countries" id="countryList">
+
+  <div class="card country selected"
+  onclick="selectCountry('Kenya','KES')">
+   <div class="flag">🇰🇪</div>
+   <h3>Kenya</h3>
+   <small>KES</small>
+  </div>
+
+  <div class="card country"
+  onclick="selectCountry('Uganda','UGX')">
+   <div class="flag">🇺🇬</div>
+   <h3>Uganda</h3>
+   <small>UGX</small>
+  </div>
+
+  <div class="card country"
+  onclick="selectCountry('Tanzania','TZS')">
+   <div class="flag">🇹🇿</div>
+   <h3>Tanzania</h3>
+   <small>TZS</small>
+  </div>
+
+  <div class="card country"
+  onclick="selectCountry('South Africa','ZAR')">
+   <div class="flag">🇿🇦</div>
+   <h3>South Africa</h3>
+   <small>ZAR</small>
+  </div>
+
+  <div class="card country"
+  onclick="selectCountry('Nigeria','NGN')">
+   <div class="flag">🇳🇬</div>
+   <h3>Nigeria</h3>
+   <small>NGN</small>
+  </div>
+
+  <div class="card country"
+  onclick="selectCountry('Ghana','GHS')">
+   <div class="flag">🇬🇭</div>
+   <h3>Ghana</h3>
+   <small>GHS</small>
+  </div>
+
+  <div class="card country"
+  onclick="selectCountry('United Kingdom','GBP')">
+   <div class="flag">🇬🇧</div>
+   <h3>United Kingdom</h3>
+   <small>GBP</small>
+  </div>
+
+  <div class="card country"
+  onclick="selectCountry('Germany','EUR')">
+   <div class="flag">🇩🇪</div>
+   <h3>Germany</h3>
+   <small>EUR</small>
+  </div>
+
+  <div class="card country"
+  onclick="selectCountry('France','EUR')">
+   <div class="flag">🇫🇷</div>
+   <h3>France</h3>
+   <small>EUR</small>
+  </div>
+
+  <div class="card country"
+  onclick="selectCountry('United States','USD')">
+   <div class="flag">🇺🇸</div>
+   <h3>United States</h3>
+   <small>USD</small>
+  </div>
+
+  <div class="card country"
+  onclick="selectCountry('Canada','CAD')">
+   <div class="flag">🇨🇦</div>
+   <h3>Canada</h3>
+   <small>CAD</small>
+  </div>
+
+  <div class="card country"
+  onclick="selectCountry('India','INR')">
+   <div class="flag">🇮🇳</div>
+   <h3>India</h3>
+   <small>INR</small>
+  </div>
+
+  <div class="card country"
+  onclick="selectCountry('China','CNY')">
+   <div class="flag">🇨🇳</div>
+   <h3>China</h3>
+   <small>CNY</small>
+  </div>
+
+  <div class="card country"
+  onclick="selectCountry('Japan','JPY')">
+   <div class="flag">🇯🇵</div>
+   <h3>Japan</h3>
+   <small>JPY</small>
+  </div>
+
+  <div class="card country"
+  onclick="selectCountry('United Arab Emirates','AED')">
+   <div class="flag">🇦🇪</div>
+   <h3>UAE</h3>
+   <small>AED</small>
+  </div>
+
+  <div class="card country"
+  onclick="selectCountry('Australia','AUD')">
+   <div class="flag">🇦🇺</div>
+   <h3>Australia</h3>
+   <small>AUD</small>
+  </div>
+
+ </div>
+</section>
+
+<!-- PACKAGES -->
+
+<section class="container" id="packages">
+
+ <h2 class="section-title" id="packageHeading">
+ Kenya WiFi Packages
+ </h2>
+
+ <p class="subtitle" id="packageSubtitle">
+ Select a package to continue.
+ </p>
+
+ <div class="packages" id="packageList">
+
   <div class="card">
-   <h3>30 Minutes</h3>
+   <h3>Starter</h3>
+   <p>30 Minutes</p>
    <div class="price">KSh 5</div>
-   <button onclick="choose('30 Minutes','KSh 5')">Select Package</button>
+   <button onclick="choose('Starter','KSh 5')">
+    Select Package
+   </button>
   </div>
 
   <div class="card">
-   <h3>1 Hour</h3>
+   <h3>Standard</h3>
+   <p>1 Hour</p>
    <div class="price">KSh 10</div>
-   <button onclick="choose('1 Hour','KSh 10')">Select Package</button>
+   <button onclick="choose('Standard','KSh 10')">
+    Select Package
+   </button>
   </div>
 
   <div class="card">
-   <h3>3 Hours</h3>
+   <h3>Plus</h3>
+   <p>3 Hours</p>
    <div class="price">KSh 20</div>
-   <button onclick="choose('3 Hours','KSh 20')">Select Package</button>
+   <button onclick="choose('Plus','KSh 20')">
+    Select Package
+   </button>
   </div>
 
   <div class="card">
-   <h3>24 Hours</h3>
+   <h3>Daily</h3>
+   <p>24 Hours</p>
    <div class="price">KSh 100</div>
-   <button onclick="choose('24 Hours','KSh 100')">Select Package</button>
+   <button onclick="choose('Daily','KSh 100')">
+    Select Package
+   </button>
   </div>
 
   <div class="card">
-   <h3>7 Days</h3>
+   <h3>Weekly</h3>
+   <p>7 Days</p>
    <div class="price">KSh 300</div>
-   <button onclick="choose('7 Days','KSh 300')">Select Package</button>
+   <button onclick="choose('Weekly','KSh 300')">
+    Select Package
+   </button>
   </div>
 
   <div class="card">
-   <h3>30 Days</h3>
+   <h3>Monthly</h3>
+   <p>30 Days</p>
    <div class="price">KSh 1,000</div>
-   <button onclick="choose('30 Days','KSh 1,000')">Select Package</button>
+   <button onclick="choose('Monthly','KSh 1,000')">
+    Select Package
+   </button>
   </div>
- </div>
-</div>
 
-<div class="container">
- <div class="info">
-  <h2>Join PLANET WiFi as a Provider</h2>
-  <p>Bring your WiFi network to our global connectivity platform.</p>
-  <button class="btn" onclick="alert('Provider registration will be available soon.')">Become a Provider</button>
  </div>
-</div>
+
+ <div class="notice">
+ Prices shown are initial Kenya demonstration prices.
+ Other countries will display provider-set local prices
+ when their providers are registered.
+ </div>
+
+</section>
+
+<!-- PROVIDERS -->
+
+<section class="container" id="providers">
+
+ <div class="info">
+
+  <h2>Become a Planet WiFi Provider</h2>
+
+  <p>
+  Own a WiFi network or internet service?
+  Join Planet WiFi and offer your services to customers.
+  </p>
+
+  <button class="btn" onclick="provider()">
+   Register as Provider
+  </button>
+
+ </div>
+
+</section>
+
+<!-- FOOTER -->
 
 <footer>
- <h3>PLANET WiFi</h3>
+
+ <h2>PLANET <span style="color:#ff8900">WiFi</span></h2>
+
  <p>One Planet. One Connection.</p>
- <p>Global connectivity platform</p>
- <p>© 2026 PLANET WiFi</p>
+
+ <p>Global Internet Services Platform</p>
+
+ <p>© 2026 Planet WiFi. All rights reserved.</p>
+
 </footer>
 
+<div id="message"></div>
+
 <script>
-function choose(packageName,price){
- alert("Selected: "+packageName+" - "+price+
- "\nRegistration and payment integration will be connected next.");
+
+let currentCountry = "Kenya";
+let currentCurrency = "KES";
+
+function showMessage(text){
+
+ const box = document.getElementById("message");
+
+ box.textContent = text;
+ box.style.display = "block";
+
+ setTimeout(()=>{
+  box.style.display = "none";
+ },3500);
+
 }
+
+function selectCountry(country,currency){
+
+ currentCountry = country;
+ currentCurrency = currency;
+
+ document.getElementById("selectedCountry").textContent = country;
+
+ document.getElementById("packageHeading").textContent =
+ country + " WiFi Packages";
+
+ const cards = document.querySelectorAll(".country");
+
+ cards.forEach(card=>{
+  card.classList.remove("selected");
+
+  if(card.querySelector("h3").textContent === country){
+   card.classList.add("selected");
+  }
+ });
+
+ if(country === "Kenya"){
+
+  document.getElementById("packageSubtitle").textContent =
+  "Choose your Kenya WiFi package.";
+
+  document.getElementById("packageList").style.display = "grid";
+
+ }else{
+
+  document.getElementById("packageSubtitle").textContent =
+  "Prices and packages will be provided by registered " +
+  country + " WiFi providers.";
+
+  document.getElementById("packageList").style.display = "none";
+
+ }
+
+ showMessage(country + " selected successfully.");
+
+}
+
+function choose(name,price){
+
+ showMessage(
+  name + " package selected. Payment and internet activation " +
+  "will be connected in the next development stage."
+ );
+
+}
+
+function provider(){
+
+ showMessage(
+  "Provider registration will be activated in the next development stage."
+ );
+
+}
+
 </script>
 
 </body>
-</html>
+    </html>
